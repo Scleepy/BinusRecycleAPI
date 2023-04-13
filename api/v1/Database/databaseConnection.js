@@ -5,7 +5,7 @@ const databaseConfig = {
   password: process.env.DB_PWD,
   database: process.env.DB_NAME,
   driver: "msnodesqlv8",
-  server: "DESKTOP-0H1FS4U\\LOCALHOST",
+  server: process.env.DB_SERVER,
   options: {
     trustedConnection: true,
   },
@@ -14,9 +14,7 @@ const databaseConfig = {
 const connectDatabase = async () => {
   try {
     await sql.connect(databaseConfig);
-    console.log("Successfully connected to database");
   } catch (err) {
-    console.log("Error connecting to database: ", err);
     throw err;
   }
 };
@@ -24,4 +22,3 @@ const connectDatabase = async () => {
 connectDatabase();
 
 module.exports = sql;
-
