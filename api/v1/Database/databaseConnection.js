@@ -1,4 +1,5 @@
 const sql = require('mssql/msnodesqlv8');
+require('dotenv').config();
 
 const databaseConfig = {
   user: process.env.DB_USER,
