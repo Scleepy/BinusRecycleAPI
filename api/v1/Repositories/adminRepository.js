@@ -5,7 +5,7 @@ const sql = require('./databaseConnection');
 const getLatestID = async () => {
     try {
         const result = await sql.query('SELECT TOP 1 AdminID FROM MsAdmin ORDER BY AdminID DESC');
-        if (result.recordset.length === 0) return 'AD000';
+         if (result.recordset.length === 0) return 'AD000';
         return result.recordset[0].AdminID;
     }catch(err){
         throw { status: 500, message: err };
@@ -31,4 +31,22 @@ const registerAdmin = async (admin) => {
     }
 };
 
-module.exports = {getLatestID, existEmail, registerAdmin};
+const getAdminByEmail = async (email) => {
+    try {
+        const result = await sql.query(`SELECT * FROM MsAdmin WHERE AdminEmail = '${email}'`);
+        return result.recordset[0];
+    }catch(err){
+        throw { status: 500, message: err };
+    }
+};
+
+const loginAdmin = async (email, password) => {
+    try {
+        const result = await sql.query(`SELECT * FROM MsAdmin WHERE AdminEmail = '${email}' AND AdminPassword = '${password}'`);
+        return result;
+    }catch(err){
+        throw { status: 500, message: err };
+    }
+};
+
+module.exports = {getLatestID, existEmail, registerAdmin, loginAdmin, getAdminByEmail};

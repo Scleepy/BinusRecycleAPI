@@ -1,4 +1,4 @@
-const Category = require('./../Database/Category');
+const Category = require('./../Repositories/categoryRepository');
 
 const getAllCategories = async () => {
     try {
