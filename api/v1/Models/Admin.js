@@ -22,6 +22,10 @@ const adminSchema = new mongoose.Schema({
   PasswordSalt: {
     type: String,
     required: true
+  },
+  StationID: {
+    type: String,
+    required: true
   }
 });
   

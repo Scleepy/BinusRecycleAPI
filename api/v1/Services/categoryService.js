@@ -1,8 +1,8 @@
-const Category = require('./../Repositories/categoryRepository');
+const categoryRepository = require('./../Repositories/categoryRepository');
 
 const getAllCategories = async () => {
     try {
-        const allCategories =  await Category.getAllCategories();
+        const allCategories =  await categoryRepository.getAllCategories();
         return allCategories;
     }catch(err){
         throw err;

@@ -4,12 +4,13 @@ const Admin = require('../Models/Admin');
 const registerAdmin = async (req, res) => {
     try {
 
-        const {name, email, password} = req.body;
+        const {name, email, password, stationid} = req.body;
 
         const admin = new Admin({
             AdminName: name,
             AdminEmail: email,
             AdminPassword: password,
+            StationID: stationid,
         });
 
         await adminService.registerAdmin(admin);

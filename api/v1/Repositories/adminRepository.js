@@ -24,7 +24,7 @@ const existEmail = async (adminEmail) => {
 
 const registerAdmin = async (admin) => {
     try {
-        const result = await sql.query(`INSERT INTO MsAdmin VALUES('${admin.AdminID}', '${admin.AdminName}', '${admin.AdminEmail}', '${admin.AdminPassword}', '${admin.PasswordSalt}')`);
+        const result = await sql.query(`INSERT INTO MsAdmin VALUES('${admin.AdminID}', '${admin.AdminName}', '${admin.AdminEmail}', '${admin.AdminPassword}', '${admin.PasswordSalt}', '${admin.StationID}')`);
         return result;
     }catch(err){
         throw { status: 500, message: err };
