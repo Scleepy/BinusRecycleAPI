@@ -1,17 +1,9 @@
 const adminService = require('./../Services/adminService');
-const Admin = require('../Models/Admin');
 
 const registerAdmin = async (req, res) => {
     try {
 
-        const {name, email, password, stationid} = req.body;
-
-        const admin = new Admin({
-            AdminName: name,
-            AdminEmail: email,
-            AdminPassword: password,
-            StationID: stationid,
-        });
+        const admin = req.body;
 
         await adminService.registerAdmin(admin);
 
@@ -24,9 +16,9 @@ const registerAdmin = async (req, res) => {
 const loginAdmin = async (req, res) => {
     try {
 
-        const {email, password} = req.body;
+        const admin = req.body;
         
-        const result = await adminService.loginAdmin(email, password);
+        const result = await adminService.loginAdmin(admin);
 
         res.send({ status: "OK", data: result });   
     } catch (err) {
