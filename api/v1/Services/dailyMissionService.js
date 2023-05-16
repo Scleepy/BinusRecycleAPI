@@ -18,4 +18,13 @@ const getDailyMissionProgress = async (studentID) => {
     }
 };
 
-module.exports = {getAllDailyMission, getDailyMissionProgress};
+const getDailyMissionHistory = async (studentID) => {
+    try {
+        const dailyMissionHistory =  await dailyMissionRepository.getDailyMissionHistory(studentID);
+        return dailyMissionHistory;
+    }catch(err){
+        throw err;
+    }
+};
+
+module.exports = {getAllDailyMission, getDailyMissionProgress, getDailyMissionHistory};

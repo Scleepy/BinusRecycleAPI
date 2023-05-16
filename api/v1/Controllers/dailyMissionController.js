@@ -21,4 +21,16 @@ const getDailyMissionProgress = async (req, res) => {
     }
 };
 
-module.exports = {getAllDailyMission, getDailyMissionProgress};
+const getDailyMissionHistory = async (req, res) => {
+
+    const studentID = req.body.studentID;
+
+    try {
+        const dailyMissionHistory = await dailyMissionService.getDailyMissionHistory(studentID);
+        res.send({ status: "OK", data: dailyMissionHistory });   
+    } catch (err) {
+        res.status(err?.status || 500).send({ error: err?.message || err });
+    }
+};
+
+module.exports = {getAllDailyMission, getDailyMissionProgress, getDailyMissionHistory};

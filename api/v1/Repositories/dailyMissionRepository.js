@@ -20,4 +20,13 @@ const getDailyMissionProgress = async (studentID) => {
     }
 };
 
-module.exports = {getAllDailyMission, getDailyMissionProgress};
+const getDailyMissionHistory = async (studentID) => {
+    try {
+        const result = await sql.query(`SELECT * FROM TrDailyMissionCompletion WHERE StudentID = '${studentID}'`);
+        return result.recordset;
+    }catch(err){
+        throw { status: 500, message: err };
+    }
+};
+
+module.exports = {getAllDailyMission, getDailyMissionProgress, getDailyMissionHistory};
