@@ -40,7 +40,7 @@ const loginStudent = async (student) => {
 
         const token = generateJWTToken({id: getStudentByEmail.StudentID, email: getStudentByEmail.StudentEmail});
 
-        return {token: token, ...getStudentByEmail};
+        return {Token: token, ...getStudentByEmail};
     }catch(err){
         throw err;
     }

@@ -42,7 +42,7 @@ const loginAdmin = async (admin) => {
 
         const token = generateJWTToken({id: getAdminByEmail.AdminID, email: getAdminByEmail.AdminEmail});
 
-        return {token: token, name: getAdminByEmail.AdminName, email: getAdminByEmail.AdminEmail, stationid: getAdminByEmail.StationID};
+        return {Token: token, name: getAdminByEmail.AdminName, email: getAdminByEmail.AdminEmail, stationid: getAdminByEmail.StationID};
     }catch(err){
         throw err;
     }
