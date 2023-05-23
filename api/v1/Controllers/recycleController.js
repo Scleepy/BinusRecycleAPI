@@ -24,4 +24,17 @@ const getSpecificRecycleHistory = async (req, res) => {
     }
 };
 
-module.exports = {getAllRecycleHistory, getSpecificRecycleHistory};
+const studentRecycle = async (req, res) => {
+
+    const data = req.body;
+
+    try {
+        const studentRecycle = await recycleService.studentRecycle(data);
+        res.send({ status: "OK", data: studentRecycle });   
+    } catch (err) {
+        res.status(err?.status || 500).send({ error: err?.message || err });
+    }
+
+}
+
+module.exports = {getAllRecycleHistory, getSpecificRecycleHistory, studentRecycle};

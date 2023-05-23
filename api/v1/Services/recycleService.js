@@ -18,4 +18,21 @@ const getSpecificRecycleHistory = async (data) => {
     }
 };
 
-module.exports = {getAllRecycleHistory, getSpecificRecycleHistory};
+const studentRecycle = async (data) => {
+    try {
+        
+        // 1kg => +20 eco coins
+        // get total eco coins from main recycle data
+        // update recycle history
+
+        // check daily mission => if done all(+5)
+
+
+        // const specificRecycleHistory =  await recycleRepository.getSpecificRecycleHistory(data);
+        // return specificRecycleHistory;
+    }catch(err){
+        throw err;
+    }
+}
+
+module.exports = {getAllRecycleHistory, getSpecificRecycleHistory, studentRecycle};

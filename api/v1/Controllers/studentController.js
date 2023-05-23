@@ -26,4 +26,17 @@ const loginStudent = async (req, res) => {
     }
 }
 
-module.exports = {registerStudent, loginStudent};
+const getStudent = async (req, res) => {
+    try {
+
+        const studentID = req.body.studentID;
+        
+        const result = await studentService.getStudent(studentID);
+
+        res.send({ status: "OK", data: result });   
+    } catch (err) {
+        res.status(err?.status || 500).send({ error: err?.message || err });
+    }
+}
+
+module.exports = {registerStudent, loginStudent, getStudent};

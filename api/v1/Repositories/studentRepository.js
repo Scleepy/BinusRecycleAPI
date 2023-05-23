@@ -2,21 +2,10 @@ const express = require('express');
 require('dotenv').config();
 const sql = require('./databaseConnection');
 
-const existStudentID = async (studentID) => {
+const getStudentByID = async (studentID) => {
     try {
         const result = await sql.query(`SELECT * FROM MsStudent WHERE StudentID = '${studentID}'`);
-        if (result.recordset.length === 0) return false;
-        return true;
-    }catch(err){
-        throw { status: 500, message: err };
-    }
-};
-
-const existEmail = async (studentEmail) => {
-    try {
-        const result = await sql.query(`SELECT * FROM MsStudent WHERE StudentEmail = '${studentEmail}'`);
-        if (result.recordset.length === 0) return false;
-        return true;
+        return result.recordset[0];
     }catch(err){
         throw { status: 500, message: err };
     }
@@ -54,4 +43,4 @@ const loginStudent = async (email, password) => {
     }
 };
 
-module.exports = {existStudentID, existEmail, registerStudent, loginStudent, getStudentByEmail};
+module.exports = {getStudentByID, registerStudent, loginStudent, getStudentByEmail};

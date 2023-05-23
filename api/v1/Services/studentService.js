@@ -6,11 +6,11 @@ const Student = require('../Models/Student');
 const registerStudent = async (student) => {
     try {
 
-        const existStudentID =  await studentRepository.existStudentID(student.id);
-        const existEmail =  await studentRepository.existEmail(student.email);
+        const getStudentByID =  await studentRepository.getStudentByID(student.id);
+        const getStudentByEmail =  await studentRepository.getStudentByEmail(student.email);
         
-        if(existEmail) throw { status: 409, message: 'Duplicate email address' };
-        if(existStudentID) throw { status: 409, message: 'Duplicate studentID' };
+        if(getStudentByID == null) throw { status: 409, message: 'Duplicate email address' };
+        if(getStudentByEmail == null) throw { status: 409, message: 'Duplicate studentID' };
 
         const salt = await bcrypt.genSalt(16);
         const hashedPassword = await bcrypt.hash(student.password, salt);
@@ -55,4 +55,16 @@ const generateJWTToken = (payload) => {
     return jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '24h'});
 }
 
-module.exports = {registerStudent, loginStudent};
+const getStudent = async (studentID) => {
+    try {
+        const getStudentByID =  await studentRepository.getStudentByID(studentID);
+
+        if(getStudentByID == null) throw { status: 404, message: 'Student not found' };
+
+        return getStudentByID;
+    }catch(err){
+        throw err;
+    }
+};
+
+module.exports = {registerStudent, loginStudent, getStudent};
