@@ -1,4 +1,5 @@
 const recycleRepository = require('./../Repositories/recycleRepository');
+const dailyMissionRepository = require('./../Repositories/dailyMissionRepository');
 
 const getAllRecycleHistory = async (studentID) => {
     try {
@@ -20,16 +21,32 @@ const getSpecificRecycleHistory = async (data) => {
 
 const studentRecycle = async (data) => {
     try {
-        
-        // 1kg => +20 eco coins
-        // get total eco coins from main recycle data
-        // update recycle history
 
-        // check daily mission => if done all(+5)
+        data.ecoCoins = data.itemWeight * 20;
 
+        const specificDailyMission = await dailyMissionRepository.getSpecificDailyMission(data.categoryID);
 
-        // const specificRecycleHistory =  await recycleRepository.getSpecificRecycleHistory(data);
-        // return specificRecycleHistory;
+        if(specificDailyMission.length !== 0){
+            const dailyMissionCompletionFilterByCategoryID =  await dailyMissionRepository.getDailyMissionCompletionFilterByCategoryID(data.studentID, data.categoryID);
+            
+            if(!dailyMissionCompletionFilterByCategoryID.length !== 0){
+
+                data.missionID = specificDailyMission[0].MissionID;
+
+                const dailyMissionProgress =  await dailyMissionRepository.getDailyMissionProgress(data.studentID);
+                const filteredMission  = dailyMissionProgress.filter(mission => mission.MissionID === specificDailyMission[0].MissionID);
+                const totalItemWeight = filteredMission.reduce((sum, mission) => sum + mission.ItemWeight, 0);
+                
+                if(totalItemWeight + data.itemWeight >= specificDailyMission[0].ItemWeight) {
+                    const insertCompletedDailyMission = await dailyMissionRepository.insertDailyMissionCompletion(data);
+                }
+                
+                return insertStudentRecycleHistory = await recycleRepository.insertStudentRecycleHistory(data);
+            } 
+        } else {
+            return insertStudentRecycleHistory = await recycleRepository.insertStudentRecycleHistory(data);
+        }
+
     }catch(err){
         throw err;
     }

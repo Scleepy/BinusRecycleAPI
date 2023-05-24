@@ -33,7 +33,7 @@ const registerAdmin = async (admin) => {
 
 const getAdminByEmail = async (email) => {
     try {
-        const result = await sql.query(`SELECT * FROM MsAdmin WHERE AdminEmail = '${email}'`);
+        const result = await sql.query(`SELECT AdminID, AdminName, AdminEmail, AdminPassword, PasswordSalt, A.StationID, B.BuildingID, StationLocation, BuildingName FROM MsAdmin A JOIN MsRecycleStation B ON A.StationID = B.StationID JOIN MsBuilding C ON B.BuildingID = C.BuildingID WHERE AdminEmail = '${email}'`);
         return result.recordset[0];
     }catch(err){
         throw { status: 500, message: err };

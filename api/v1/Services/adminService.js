@@ -40,7 +40,7 @@ const loginAdmin = async (admin) => {
         const isPasswordValid = await comparePassword(admin.password, getAdminByEmail.AdminPassword, getAdminByEmail.PasswordSalt); 
         if(!isPasswordValid) throw { status: 401, message: 'Incorrect Password' };
 
-        const token = generateJWTToken({id: getAdminByEmail.AdminID, email: getAdminByEmail.AdminEmail});
+        const token = generateJWTToken({id: getAdminByEmail.AdminID, email: getAdminByEmail.AdminEmail})
 
         return {Token: token, ...getAdminByEmail};
     }catch(err){

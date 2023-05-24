@@ -20,4 +20,21 @@ const getSpecificRecycleHistory = async (data) => {
     }
 };
 
-module.exports = {getAllRecycleHistory, getSpecificRecycleHistory};
+const insertStudentRecycleHistory = async (data) => {
+
+    try {
+      const missionID = data.missionID ? `'${data.missionID}'` : 'NULL';
+
+      const result = await sql.query(`
+      INSERT INTO TrStudentRecycleHistory 
+      (StudentID, StationID, CategoryID, ItemWeight, PointsObtained, MissionID) 
+      VALUES 
+      ('${data.studentID}', '${data.stationID}', '${data.categoryID}', '${data.itemWeight}', '${data.ecoCoins}', ${missionID})`);
+
+      return result;
+    } catch (err) {
+      throw { status: 500, message: err };
+    }
+  };
+
+module.exports = {getAllRecycleHistory, getSpecificRecycleHistory, insertStudentRecycleHistory};

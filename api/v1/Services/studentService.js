@@ -8,9 +8,9 @@ const registerStudent = async (student) => {
 
         const getStudentByID =  await studentRepository.getStudentByID(student.id);
         const getStudentByEmail =  await studentRepository.getStudentByEmail(student.email);
-        
-        if(getStudentByID == null) throw { status: 409, message: 'Duplicate email address' };
-        if(getStudentByEmail == null) throw { status: 409, message: 'Duplicate studentID' };
+
+        if(getStudentByID) throw { status: 409, message: 'Duplicate studentID' };
+        if(getStudentByEmail) throw { status: 409, message: 'Duplicate email address' };
 
         const salt = await bcrypt.genSalt(16);
         const hashedPassword = await bcrypt.hash(student.password, salt);
