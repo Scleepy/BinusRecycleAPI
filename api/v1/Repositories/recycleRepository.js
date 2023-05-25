@@ -25,13 +25,15 @@ const insertStudentRecycleHistory = async (data) => {
     try {
       const missionID = data.missionID ? `'${data.missionID}'` : 'NULL';
 
-      const result = await sql.query(`
+      const insertTrStudentRecycleHistory = await sql.query(`
       INSERT INTO TrStudentRecycleHistory 
-      (StudentID, StationID, CategoryID, ItemWeight, PointsObtained, MissionID) 
+      (StudentID, StationID, CategoryID, AdminID, ItemWeight, PointsObtained, MissionID) 
       VALUES 
-      ('${data.studentID}', '${data.stationID}', '${data.categoryID}', '${data.itemWeight}', '${data.ecoCoins}', ${missionID})`);
+      ('${data.studentID}', '${data.stationID}', '${data.categoryID}', '${data.adminID}', '${data.itemWeight}', '${data.ecoCoins}', ${missionID})`);
 
-      return result;
+      const insertMsStudent = await sql.query(`UPDATE MsStudent SET StudentPoints = StudentPoints + ${data.ecoCoins} WHERE StudentID = '${data.studentID}'`);
+
+      return insertTrStudentRecycleHistory.recordset, insertMsStudent.recordset;
     } catch (err) {
       throw { status: 500, message: err };
     }

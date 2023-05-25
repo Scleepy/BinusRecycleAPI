@@ -55,7 +55,10 @@ const getDailyMissionHistory = async (studentID) => {
 
 const getDailyMissionCompletionFilterByCategoryID = async (studentID, categoryID) => {
     try {
-        const result = await sql.query(`SELECT * FROM TrDailyMissionCompletion A JOIN MsDailyMission B ON A.MissionID = B.MissionID WHERE StudentID = '${studentID}' AND CategoryID = '${categoryID}'`);
+        const currentDay = new Date().toISOString().split('T')[0].replace(/-/g, '');
+        const nextDay = new Date(Date.now() + 86400000).toISOString().split('T')[0].replace(/-/g, '');
+
+        const result = await sql.query(`SELECT * FROM TrDailyMissionCompletion A JOIN MsDailyMission B ON A.MissionID = B.MissionID WHERE StudentID = '${studentID}' AND CategoryID = '${categoryID}' AND CompletionDate >= '${currentDay}' AND CompletionDate < '${nextDay}'`);
         return result.recordset;
     }catch(err){
         throw { status: 500, message: err };
@@ -64,8 +67,10 @@ const getDailyMissionCompletionFilterByCategoryID = async (studentID, categoryID
 
 const insertDailyMissionCompletion = async (data) => {
     try {
-        const result = await sql.query(`INSERT INTO TrDailyMissionCompletion (StudentID, MissionID, PointsEarned) VALUES ('${data.studentID}', '${data.missionID}', '5')`);
-        return result.recordset;
+        const insertTrDailyMissionCompletion = await sql.query(`INSERT INTO TrDailyMissionCompletion (StudentID, MissionID, PointsEarned) VALUES ('${data.studentID}', '${data.missionID}', '5')`);
+        const insertMsStudent = await sql.query(`UPDATE MsStudent SET StudentPoints = StudentPoints + 5 WHERE StudentID = '${data.studentID}'`);
+        
+        return insertTrDailyMissionCompletion.recordset, insertMsStudent.recordset;
     }catch(err){
         throw { status: 500, message: err };
     }
