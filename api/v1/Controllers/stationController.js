@@ -13,4 +13,13 @@ const getSpecificStation = async (req, res) => {
     }
 };
 
-module.exports = {getSpecificStation};
+const getAllStationAndInformation = async (req, res) => {
+    try {
+        const allStationAndInformation = await stationService.getAllStationAndInformation();
+        res.send({ status: "OK", data: allStationAndInformation });   
+    } catch (err) {
+        res.status(err?.status || 500).send({ error: err?.message || err });
+    }
+};
+
+module.exports = {getSpecificStation, getAllStationAndInformation};

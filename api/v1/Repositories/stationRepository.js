@@ -11,4 +11,13 @@ const getSpecificStation = async (stationID) => {
     }
 };
 
-module.exports = {getSpecificStation};
+const getAllStationAndInformation = async () => {
+    try {
+        const result = await sql.query('SELECT A.StationID, B.BuildingID, B.BuildingName, A.StationLocation, C.CategoryID, D.CategoryName FROM MsRecycleStation A JOIN MsBuilding B ON A.BuildingID = B.BuildingID JOIN MsRecycleStationCategory C ON A.StationID = C.StationID JOIN MsCategory D ON C.CategoryID = D.CategoryID');
+        return result.recordset;
+    }catch(err){
+        throw { status: 500, message: err };
+    }
+}
+
+module.exports = {getSpecificStation, getAllStationAndInformation};

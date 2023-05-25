@@ -9,4 +9,13 @@ const getSpecificStation = async (stationID) => {
     }
 };
 
-module.exports = {getSpecificStation};
+const getAllStationAndInformation = async () => {
+    try {
+        const allStationAndInformation =  await stationRepository.getAllStationAndInformation();
+        return allStationAndInformation;
+    }catch(err){
+        throw err;
+    }
+};
+
+module.exports = {getSpecificStation, getAllStationAndInformation};
