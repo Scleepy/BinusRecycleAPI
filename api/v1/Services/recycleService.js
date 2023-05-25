@@ -10,6 +10,15 @@ const getSpecificRecycleHistory = async (studentID) => {
     }
 };
 
+const getSpecificRecycleHistoryByAdmin = async (adminID) => {
+    try {
+        const recycleHistory =  await recycleRepository.getSpecificRecycleHistoryByAdmin(adminID);
+        return recycleHistory;
+    }catch(err){
+        throw err;
+    }
+};
+
 const getSpecificCategoryRecycleHistory = async (data) => {
     try {
         const specificRecycleHistory =  await recycleRepository.getSpecificCategoryRecycleHistory(data);
@@ -54,4 +63,4 @@ const studentRecycle = async (data) => {
     }
 }
 
-module.exports = {getSpecificRecycleHistory, getSpecificCategoryRecycleHistory, studentRecycle};
+module.exports = {getSpecificRecycleHistory, getSpecificCategoryRecycleHistory, studentRecycle, getSpecificRecycleHistoryByAdmin};

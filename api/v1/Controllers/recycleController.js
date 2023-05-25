@@ -12,6 +12,18 @@ const getSpecificRecycleHistory = async (req, res) => {
     }
 };
 
+const getSpecificRecycleHistoryByAdmin = async (req, res) => {
+
+    const adminID = req.params.adminID;
+
+    try {
+        const recycleHistory = await recycleService.getSpecificRecycleHistoryByAdmin(adminID);
+        res.send({ status: "OK", data: recycleHistory });   
+    } catch (err) {
+        res.status(err?.status || 500).send({ error: err?.message || err });
+    }
+};
+
 const getSpecificCategoryRecycleHistory = async (req, res) => {
 
     const data = req.params;
@@ -37,4 +49,4 @@ const studentRecycle = async (req, res) => {
 
 }
 
-module.exports = {getSpecificRecycleHistory, getSpecificCategoryRecycleHistory, studentRecycle};
+module.exports = {getSpecificRecycleHistory, getSpecificCategoryRecycleHistory, studentRecycle, getSpecificRecycleHistoryByAdmin};
