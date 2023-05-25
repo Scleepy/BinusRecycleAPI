@@ -1,12 +1,12 @@
 const purchaseRepository = require('./../Repositories/purchaseRepository');
 
-const getPurchaseHistory = async (studentID) => {
+const getSpecificPurchaseHistory = async (studentID) => {
     try {
-        const purchaseHistory =  await purchaseRepository.getPurchaseHistory(studentID);
+        const purchaseHistory =  await purchaseRepository.getSpecificPurchaseHistory(studentID);
         return purchaseHistory;
     }catch(err){
         throw err;
     }
 };
 
-module.exports = {getPurchaseHistory};
+module.exports = {getSpecificPurchaseHistory};

@@ -1,18 +1,18 @@
 const recycleRepository = require('./../Repositories/recycleRepository');
 const dailyMissionRepository = require('./../Repositories/dailyMissionRepository');
 
-const getAllRecycleHistory = async (studentID) => {
+const getSpecificRecycleHistory = async (studentID) => {
     try {
-        const recycleHistory =  await recycleRepository.getAllRecycleHistory(studentID);
+        const recycleHistory =  await recycleRepository.getSpecificRecycleHistory(studentID);
         return recycleHistory;
     }catch(err){
         throw err;
     }
 };
 
-const getSpecificRecycleHistory = async (data) => {
+const getSpecificCategoryRecycleHistory = async (data) => {
     try {
-        const specificRecycleHistory =  await recycleRepository.getSpecificRecycleHistory(data);
+        const specificRecycleHistory =  await recycleRepository.getSpecificCategoryRecycleHistory(data);
         return specificRecycleHistory;
     }catch(err){
         throw err;
@@ -52,4 +52,4 @@ const studentRecycle = async (data) => {
     }
 }
 
-module.exports = {getAllRecycleHistory, getSpecificRecycleHistory, studentRecycle};
+module.exports = {getSpecificRecycleHistory, getSpecificCategoryRecycleHistory, studentRecycle};

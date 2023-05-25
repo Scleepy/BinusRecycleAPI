@@ -4,7 +4,7 @@ const dailyMissionController = require('./../Controllers/dailyMissionController'
 const router = express.Router();
 
 router.get('/', dailyMissionController.getAllDailyMission);
-router.post('/progress', dailyMissionController.getDailyMissionProgress);
-router.post('/history', dailyMissionController.getDailyMissionHistory);
+router.get('/progress/:studentID', dailyMissionController.getSpecificDailyMissionProgress);
+router.get('/history/:studentID', dailyMissionController.getSpecificDailyMissionHistory);
 
 module.exports = router;

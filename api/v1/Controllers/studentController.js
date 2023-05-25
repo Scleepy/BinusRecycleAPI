@@ -26,12 +26,12 @@ const loginStudent = async (req, res) => {
     }
 }
 
-const getStudent = async (req, res) => {
+const getSpecificStudent = async (req, res) => {
     try {
 
-        const studentID = req.body.studentID;
+        const studentID = req.params.studentID;
         
-        const result = await studentService.getStudent(studentID);
+        const result = await studentService.getSpecificStudent(studentID);
 
         res.send({ status: "OK", data: result });   
     } catch (err) {
@@ -39,4 +39,4 @@ const getStudent = async (req, res) => {
     }
 }
 
-module.exports = {registerStudent, loginStudent, getStudent};
+module.exports = {registerStudent, loginStudent, getSpecificStudent};

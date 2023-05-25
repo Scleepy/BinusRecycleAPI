@@ -1,23 +1,23 @@
 const recycleService = require('./../Services/recycleService');
 
-const getAllRecycleHistory = async (req, res) => {
+const getSpecificRecycleHistory = async (req, res) => {
 
-    const studentID = req.body.studentID;
+    const studentID = req.params.studentID;
 
     try {
-        const recycleHistory = await recycleService.getAllRecycleHistory(studentID);
+        const recycleHistory = await recycleService.getSpecificRecycleHistory(studentID);
         res.send({ status: "OK", data: recycleHistory });   
     } catch (err) {
         res.status(err?.status || 500).send({ error: err?.message || err });
     }
 };
 
-const getSpecificRecycleHistory = async (req, res) => {
+const getSpecificCategoryRecycleHistory = async (req, res) => {
 
-    const data = req.body;
+    const data = req.params;
 
     try {
-        const specificRecycleHistory = await recycleService.getSpecificRecycleHistory(data);
+        const specificRecycleHistory = await recycleService.getSpecificCategoryRecycleHistory(data);
         res.send({ status: "OK", data: specificRecycleHistory });   
     } catch (err) {
         res.status(err?.status || 500).send({ error: err?.message || err });
@@ -37,4 +37,4 @@ const studentRecycle = async (req, res) => {
 
 }
 
-module.exports = {getAllRecycleHistory, getSpecificRecycleHistory, studentRecycle};
+module.exports = {getSpecificRecycleHistory, getSpecificCategoryRecycleHistory, studentRecycle};

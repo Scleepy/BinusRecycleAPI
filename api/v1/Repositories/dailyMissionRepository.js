@@ -20,7 +20,7 @@ const getSpecificDailyMission = async (categoryID) => {
     }
 };
 
-const getDailyMissionProgress = async (studentID) => {
+const getSpecificDailyMissionProgress = async (studentID) => {
     try {
         const currentDay = new Date().toISOString().split('T')[0].replace(/-/g, '');
         const nextDay = new Date(Date.now() + 86400000).toISOString().split('T')[0].replace(/-/g, '');
@@ -32,7 +32,7 @@ const getDailyMissionProgress = async (studentID) => {
     }
 };
 
-const getCompletedDailyMission = async (studentID) => {
+const getSpecificCompletedDailyMission = async (studentID) => {
     try {
         const currentDay = new Date().toISOString().split('T')[0].replace(/-/g, '');
         const nextDay = new Date(Date.now() + 86400000).toISOString().split('T')[0].replace(/-/g, '');
@@ -71,4 +71,4 @@ const insertDailyMissionCompletion = async (data) => {
     }
 }
 
-module.exports = {getAllDailyMission, getDailyMissionProgress, getDailyMissionHistory, getCompletedDailyMission, getDailyMissionCompletionFilterByCategoryID, getSpecificDailyMission, insertDailyMissionCompletion};
+module.exports = {getAllDailyMission, getSpecificDailyMissionProgress, getDailyMissionHistory, getSpecificCompletedDailyMission, getDailyMissionCompletionFilterByCategoryID, getSpecificDailyMission, insertDailyMissionCompletion};

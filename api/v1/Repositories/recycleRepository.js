@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const sql = require('./databaseConnection');
 
-const getAllRecycleHistory = async (studentID) => {
+const getSpecificRecycleHistory = async (studentID) => {
     try {
         const result = await sql.query(`SELECT * FROM TrStudentRecycleHistory WHERE StudentID = '${studentID}'`);
         return result.recordset;
@@ -11,7 +11,7 @@ const getAllRecycleHistory = async (studentID) => {
     }
 };
 
-const getSpecificRecycleHistory = async (data) => {
+const getSpecificCategoryRecycleHistory = async (data) => {
     try {
         const result = await sql.query(`SELECT * FROM TrStudentRecycleHistory WHERE StudentID = '${data.studentID}' AND CategoryID = '${data.categoryID}'`);
         return result.recordset;
@@ -37,4 +37,4 @@ const insertStudentRecycleHistory = async (data) => {
     }
   };
 
-module.exports = {getAllRecycleHistory, getSpecificRecycleHistory, insertStudentRecycleHistory};
+module.exports = {getSpecificRecycleHistory, getSpecificCategoryRecycleHistory, insertStudentRecycleHistory};

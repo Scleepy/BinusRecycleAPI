@@ -1,15 +1,15 @@
 const purchaseService = require('./../Services/purchaseService');
 
-const getPurchaseHistory = async (req, res) => {
+const getSpecificPurchaseHistory = async (req, res) => {
 
-    const studentID = req.body.studentID;
+    const studentID = req.params.studentID;
 
     try {
-        const purchaseHistory = await purchaseService.getPurchaseHistory(studentID);
+        const purchaseHistory = await purchaseService.getSpecificPurchaseHistory(studentID);
         res.send({ status: "OK", data: purchaseHistory });   
     } catch (err) {
         res.status(err?.status || 500).send({ error: err?.message || err });
     }
 };
 
-module.exports = {getPurchaseHistory};
+module.exports = {getSpecificPurchaseHistory};

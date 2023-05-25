@@ -32,10 +32,10 @@ const generateMissionProgress = async (missionID, completedDailyMissions, dailyM
     return missionProgress;
 }
 
-const getDailyMissionProgress = async (studentID) => {
+const getSpecificDailyMissionProgress = async (studentID) => {
     try {
-        const dailyMissionProgress =  await dailyMissionRepository.getDailyMissionProgress(studentID);
-        const completedDailyMissions = await dailyMissionRepository.getCompletedDailyMission(studentID);
+        const dailyMissionProgress =  await dailyMissionRepository.getSpecificDailyMissionProgress(studentID);
+        const completedDailyMissions = await dailyMissionRepository.getSpecificCompletedDailyMission(studentID);
 
         let firstMissionProgress, secondMissionProgress, thirdMissionProgress;
 
@@ -53,7 +53,7 @@ const getDailyMissionProgress = async (studentID) => {
     }
 };
 
-const getDailyMissionHistory = async (studentID) => {
+const getSpecificDailyMissionHistory = async (studentID) => {
     try {
         const dailyMissionHistory =  await dailyMissionRepository.getDailyMissionHistory(studentID);
         return dailyMissionHistory;
@@ -62,4 +62,4 @@ const getDailyMissionHistory = async (studentID) => {
     }
 };
 
-module.exports = {getAllDailyMission, getDailyMissionProgress, getDailyMissionHistory};
+module.exports = {getAllDailyMission, getSpecificDailyMissionProgress, getSpecificDailyMissionHistory};

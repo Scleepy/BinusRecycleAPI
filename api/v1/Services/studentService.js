@@ -55,7 +55,7 @@ const generateJWTToken = (payload) => {
     return jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '24h'});
 }
 
-const getStudent = async (studentID) => {
+const getSpecificStudent = async (studentID) => {
     try {
         const getStudentByID =  await studentRepository.getStudentByID(studentID);
 
@@ -67,4 +67,4 @@ const getStudent = async (studentID) => {
     }
 };
 
-module.exports = {registerStudent, loginStudent, getStudent};
+module.exports = {registerStudent, loginStudent, getSpecificStudent};

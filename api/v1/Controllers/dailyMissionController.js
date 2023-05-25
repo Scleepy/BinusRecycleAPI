@@ -9,28 +9,28 @@ const getAllDailyMission = async (req, res) => {
     }
 };
 
-const getDailyMissionProgress = async (req, res) => {
+const getSpecificDailyMissionProgress = async (req, res) => {
 
-    const studentID = req.body.studentID;
+    const studentID = req.params.studentID;
 
     try {
-        const dailyMissionProgress = await dailyMissionService.getDailyMissionProgress(studentID);
+        const dailyMissionProgress = await dailyMissionService.getSpecificDailyMissionProgress(studentID);
         res.send({ status: "OK", data: dailyMissionProgress });   
     } catch (err) {
         res.status(err?.status || 500).send({ error: err?.message || err });
     }
 };
 
-const getDailyMissionHistory = async (req, res) => {
+const getSpecificDailyMissionHistory = async (req, res) => {
 
-    const studentID = req.body.studentID;
+    const studentID = req.params.studentID;
 
     try {
-        const dailyMissionHistory = await dailyMissionService.getDailyMissionHistory(studentID);
+        const dailyMissionHistory = await dailyMissionService.getSpecificDailyMissionHistory(studentID);
         res.send({ status: "OK", data: dailyMissionHistory });   
     } catch (err) {
         res.status(err?.status || 500).send({ error: err?.message || err });
     }
 };
 
-module.exports = {getAllDailyMission, getDailyMissionProgress, getDailyMissionHistory};
+module.exports = {getAllDailyMission, getSpecificDailyMissionProgress, getSpecificDailyMissionHistory};

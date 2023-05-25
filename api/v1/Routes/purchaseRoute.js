@@ -3,6 +3,6 @@ const purchaseController = require('./../Controllers/purchaseController');
 
 const router = express.Router();
 
-router.post('/history', purchaseController.getPurchaseHistory);
+router.get('/history/:studentID', purchaseController.getSpecificPurchaseHistory);
 
 module.exports = router;
