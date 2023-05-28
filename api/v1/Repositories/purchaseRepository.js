@@ -11,4 +11,13 @@ const getSpecificPurchaseHistory = async (studentID) => {
     }
 };
 
-module.exports = {getSpecificPurchaseHistory};
+const rewardPurchase = async (purchaseData) => {
+    try {
+        await sql.query(`INSERT INTO TrRewardPurchase(StudentID, RewardID, PurchaseAmount) VALUES ('${purchaseData.studentID}', '${purchaseData.rewardID}', ${purchaseData.purchaseAmount})`);
+        await sql.query(`UPDATE MsStudent SET StudentPoints = StudentPoints - ${purchaseData.ecoCoins} WHERE StudentID = '${purchaseData.studentID}'`);
+    }catch(err){
+        throw { status: 500, message: err };
+    }
+};
+
+module.exports = {getSpecificPurchaseHistory, rewardPurchase};

@@ -24,7 +24,7 @@ const registerStudent = async (student) => {
             StudentImage: student.image,
         });
 
-        return await studentRepository.registerStudent(newStudent);
+        await studentRepository.registerStudent(newStudent);
     }catch(err){
         throw err;
     }

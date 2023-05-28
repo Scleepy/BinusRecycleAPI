@@ -67,10 +67,8 @@ const getDailyMissionCompletionFilterByCategoryID = async (studentID, categoryID
 
 const insertDailyMissionCompletion = async (data) => {
     try {
-        const insertTrDailyMissionCompletion = await sql.query(`INSERT INTO TrDailyMissionCompletion (StudentID, MissionID, PointsEarned) VALUES ('${data.studentID}', '${data.missionID}', '5')`);
-        const insertMsStudent = await sql.query(`UPDATE MsStudent SET StudentPoints = StudentPoints + 5 WHERE StudentID = '${data.studentID}'`);
-        
-        return insertTrDailyMissionCompletion.recordset, insertMsStudent.recordset;
+        await sql.query(`INSERT INTO TrDailyMissionCompletion (StudentID, MissionID, PointsEarned) VALUES ('${data.studentID}', '${data.missionID}', '5')`);
+        await sql.query(`UPDATE MsStudent SET StudentPoints = StudentPoints + 5 WHERE StudentID = '${data.studentID}'`);
     }catch(err){
         throw { status: 500, message: err };
     }

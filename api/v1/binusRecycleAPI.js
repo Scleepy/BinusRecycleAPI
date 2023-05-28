@@ -8,6 +8,7 @@ const dailyMissionRouter = require('./Routes/dailyMissionRoute');
 const studentRouter = require('./Routes/studentRoute');
 const recycleRouter = require('./Routes/recycleRoute');
 const purchaseRouter = require('./Routes/purchaseRoute');
+const rewardRouter = require('./Routes/rewardRoute');
 
 const PORT = process.env.PORT;
 
@@ -22,6 +23,7 @@ app.use('/api/v1/daily-mission', dailyMissionRouter);
 app.use('/api/v1/student', studentRouter);
 app.use('/api/v1/recycle', recycleRouter);
 app.use('/api/v1/purchase', purchaseRouter);
+app.use('/api/v1/reward', rewardRouter);
 
 
 app.listen(PORT, () => {

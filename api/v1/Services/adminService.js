@@ -25,7 +25,7 @@ const registerAdmin = async (admin) => {
             StationID: admin.stationid,
         });
 
-        return await adminRepository.registerAdmin(newAdmin);
+        await adminRepository.registerAdmin(newAdmin);
     }catch(err){
         throw err;
     }

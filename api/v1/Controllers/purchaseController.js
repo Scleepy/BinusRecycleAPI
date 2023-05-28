@@ -12,4 +12,18 @@ const getSpecificPurchaseHistory = async (req, res) => {
     }
 };
 
-module.exports = {getSpecificPurchaseHistory};
+
+const rewardPurchase = async (req, res) => {
+
+    const purchaseData = req.body;
+
+    try {
+        await purchaseService.rewardPurchase(purchaseData);
+        res.send({ status: "OK" });   
+    } catch (err) {
+        res.status(err?.status || 500).send({ error: err?.message || err });
+    }
+};
+
+
+module.exports = {getSpecificPurchaseHistory, rewardPurchase};

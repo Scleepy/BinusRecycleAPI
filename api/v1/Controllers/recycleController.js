@@ -41,7 +41,7 @@ const studentRecycle = async (req, res) => {
     const data = req.body;
 
     try {
-        const studentRecycle = await recycleService.studentRecycle(data);
+        await recycleService.studentRecycle(data);
         res.send({ status: "OK" });   
     } catch (err) {
         res.status(err?.status || 500).send({ error: err?.message || err });

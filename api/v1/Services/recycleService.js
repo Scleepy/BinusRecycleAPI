@@ -47,15 +47,15 @@ const studentRecycle = async (data) => {
                 const totalItemWeight = filteredMission.reduce((sum, mission) => sum + mission.ItemWeight, 0);
                 
                 if(totalItemWeight + data.itemWeight >= specificDailyMission[0].ItemWeight) {
-                    const insertCompletedDailyMission = await dailyMissionRepository.insertDailyMissionCompletion(data); //Insert data into TrDailyMissionCompletion
+                    await dailyMissionRepository.insertDailyMissionCompletion(data); //Insert data into TrDailyMissionCompletion
                 }
                 
-                return insertStudentRecycleHistory = await recycleRepository.insertStudentRecycleHistory(data); //Insert data into TrStudentRecycleHistory (Include MissionID)
+                await recycleRepository.insertStudentRecycleHistory(data); //Insert data into TrStudentRecycleHistory (Include MissionID)
             } else { //Student already completed the daily mission
-                return insertStudentRecycleHistory = await recycleRepository.insertStudentRecycleHistory(data); //Insert data into TrStudentRecycleHistory (MissionID NULL)
+                await recycleRepository.insertStudentRecycleHistory(data); //Insert data into TrStudentRecycleHistory (MissionID NULL)
             }
         } else { //Recycled category does not match today's daily mission
-            return insertStudentRecycleHistory = await recycleRepository.insertStudentRecycleHistory(data);
+            await recycleRepository.insertStudentRecycleHistory(data);
         }
 
     }catch(err){
