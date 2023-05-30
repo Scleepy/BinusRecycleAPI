@@ -1,8 +1,14 @@
 const recycleRepository = require('./../Repositories/recycleRepository');
 const dailyMissionRepository = require('./../Repositories/dailyMissionRepository');
+const adminRepository = require('./../Repositories/adminRepository');
+const studentRepository = require('./../Repositories/studentRepository');
+const categoryRepository = require('./../Repositories/categoryRepository');
 
 const getSpecificRecycleHistory = async (studentID) => {
     try {
+        const student = await studentRepository.getStudentByID(studentID);
+        if (!student) throw { status: 404, message: 'Student Not Found' };
+
         const recycleHistory =  await recycleRepository.getSpecificRecycleHistory(studentID);
         return recycleHistory;
     }catch(err){
@@ -12,6 +18,9 @@ const getSpecificRecycleHistory = async (studentID) => {
 
 const getSpecificRecycleHistoryByAdmin = async (adminID) => {
     try {
+        const admin = await adminRepository.getAdminByID(adminID);
+        if (!admin) throw { status: 404, message: 'Admin Not Found' };
+
         const recycleHistory =  await recycleRepository.getSpecificRecycleHistoryByAdmin(adminID);
         return recycleHistory;
     }catch(err){
@@ -21,6 +30,12 @@ const getSpecificRecycleHistoryByAdmin = async (adminID) => {
 
 const getSpecificCategoryRecycleHistory = async (data) => {
     try {
+        const student = await studentRepository.getStudentByID(data.studentID);
+        if (!student) throw { status: 404, message: 'Student Not Found' };
+
+        const category = await categoryRepository.getCategoryByID(data.categoryID);
+        if (!category) throw { status: 404, message: 'Category Not Found' };
+
         const specificRecycleHistory =  await recycleRepository.getSpecificCategoryRecycleHistory(data);
         return specificRecycleHistory;
     }catch(err){

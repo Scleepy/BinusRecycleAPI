@@ -5,7 +5,7 @@ const sql = require('./databaseConnection');
 const getSpecificStation = async (stationID) => {
     try {
         const result = await sql.query(`SELECT StationID, StationLocation, BuildingName FROM MsRecycleStation JOIN MsBuilding ON MsRecycleStation.BuildingID = MsBuilding.BuildingID WHERE StationID = '${stationID}'`);
-        return result.recordset;
+        return result.recordset[0];
     }catch(err){
         throw { status: 500, message: err };
     }

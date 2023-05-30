@@ -59,7 +59,7 @@ const getSpecificStudent = async (studentID) => {
     try {
         const getStudentByID =  await studentRepository.getStudentByID(studentID);
 
-        if(getStudentByID == null) throw { status: 404, message: 'Student not found' };
+        if(!getStudentByID) throw { status: 404, message: 'Student not found' };
 
         return getStudentByID;
     }catch(err){

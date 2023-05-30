@@ -9,7 +9,7 @@ const registerAdmin = async (admin) => {
         const IDNumber = parseInt(latestID.substr(-3), 10) + 1;
 
         const newID = `AD${IDNumber.toString().padStart(3, '0')}`;
-        const exist =  await adminRepository.existEmail(admin.email);
+        const exist =  await adminRepository.getAdminByEmail(admin.email);
         
         if(exist) throw { status: 409, message: 'Duplicate email address' };
 

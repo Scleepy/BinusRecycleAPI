@@ -11,4 +11,13 @@ const getAllCategories = async () => {
     }
 };
 
-module.exports = {getAllCategories};
+const getCategoryByID = async (categoryID) => {
+    try {
+        const result = await sql.query(`SELECT * FROM MsCategory WHERE CategoryID = '${categoryID}'`);
+        return result.recordset[0];
+    }catch(err){
+        throw { status: 500, message: err };
+    }
+}
+
+module.exports = {getAllCategories, getCategoryByID};

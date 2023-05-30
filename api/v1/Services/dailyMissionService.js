@@ -1,4 +1,5 @@
 const dailyMissionRepository = require('./../Repositories/dailyMissionRepository');
+const studentRepository = require('./../Repositories/studentRepository');
 
 const getAllDailyMission = async () => {
     try {
@@ -34,6 +35,10 @@ const generateMissionProgress = async (missionID, completedDailyMissions, dailyM
 
 const getSpecificDailyMissionProgress = async (studentID) => {
     try {
+
+        const student = await studentRepository.getStudentByID(studentID);
+        if (!student) throw { status: 404, message: 'Student Not Found' };
+
         const dailyMissionProgress =  await dailyMissionRepository.getSpecificDailyMissionProgress(studentID);
         const completedDailyMissions = await dailyMissionRepository.getSpecificCompletedDailyMission(studentID);
 
@@ -55,6 +60,9 @@ const getSpecificDailyMissionProgress = async (studentID) => {
 
 const getSpecificDailyMissionHistory = async (studentID) => {
     try {
+        const student = await studentRepository.getStudentByID(studentID);
+        if (!student) throw { status: 404, message: 'Student Not Found' };
+        
         const dailyMissionHistory =  await dailyMissionRepository.getDailyMissionHistory(studentID);
         return dailyMissionHistory;
     }catch(err){

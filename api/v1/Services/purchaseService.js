@@ -4,6 +4,10 @@ const studentRepository = require('./../Repositories/studentRepository');
 
 const getSpecificPurchaseHistory = async (studentID) => {
     try {
+
+        const student = await studentRepository.getStudentByID(studentID);
+        if (!student) throw { status: 404, message: 'Student Not Found' };
+        
         const purchaseHistory =  await purchaseRepository.getSpecificPurchaseHistory(studentID);
         return purchaseHistory;
     }catch(err){
