@@ -39,4 +39,16 @@ const getSpecificStudent = async (req, res) => {
     }
 }
 
-module.exports = {registerStudent, loginStudent, getSpecificStudent};
+const updatePassword = async (req, res) => {
+    try {
+
+        const obj = req.body;
+        const result = await studentService.updatePassword(obj);
+
+        res.send({ status: "OK", data: result });   
+    } catch (err) {
+        res.status(err?.status || 500).send({ error: err?.message || err });
+    }
+}
+
+module.exports = {registerStudent, loginStudent, getSpecificStudent, updatePassword};

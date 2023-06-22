@@ -13,8 +13,8 @@ const getStudentByID = async (studentID) => {
 
 const registerStudent = async (newStudent) => {
     try {
-        await sql.query(`INSERT INTO MsStudent(StudentID, StudentName, StudentEmail, StudentPassword, PasswordSalt) 
-        VALUES('${newStudent.StudentID}', '${newStudent.StudentName}', '${newStudent.StudentEmail}', '${newStudent.StudentPassword}', '${newStudent.PasswordSalt}')`);
+        await sql.query(`INSERT INTO MsStudent(StudentID, StudentName, StudentEmail, StudentPassword, PasswordSalt, StudentProgram) 
+        VALUES('${newStudent.StudentID}', '${newStudent.StudentName}', '${newStudent.StudentEmail}', '${newStudent.StudentPassword}', '${newStudent.PasswordSalt}', '${newStudent.StudentProgram}')`);
     }catch(err){
         throw { status: 500, message: err };
     }
@@ -38,4 +38,13 @@ const loginStudent = async (email, password) => {
     }
 };
 
-module.exports = {getStudentByID, registerStudent, loginStudent, getStudentByEmail};
+const updatePassword = async (studentID, newPassword, passwordSalt) => {
+    try {
+        const result = await sql.query(`UPDATE MsStudent SET StudentPassword = '${newPassword}', PasswordSalt = '${passwordSalt}' WHERE StudentID = '${studentID}'`);
+        return result;
+    }catch(err){
+        throw { status: 500, message: err };
+    }
+};
+
+module.exports = {getStudentByID, registerStudent, loginStudent, getStudentByEmail, updatePassword};

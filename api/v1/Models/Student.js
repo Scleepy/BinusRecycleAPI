@@ -22,13 +22,13 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  StudentImage: {
-    type: Buffer,
-    default: null
-  },
   StudentPoints: {
     type: Number,
     default: 0
+  },
+  StudentProgram: {
+    type: String,
+    required: true
   }
 });
   
