@@ -3,25 +3,29 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Student = require('../Models/Student');
 
+const generateJWTToken = (payload) => {
+    return jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '24h'});
+}
+
 const registerStudent = async (student) => {
     try {
 
-        const getStudentByID =  await studentRepository.getStudentByID(student.id);
-        const getStudentByEmail =  await studentRepository.getStudentByEmail(student.email);
+        const getStudentByID =  await studentRepository.getStudentByID(student.studentID);
+        const getStudentByEmail =  await studentRepository.getStudentByEmail(student.studentEmail);
 
         if(getStudentByID) throw { status: 409, message: 'Duplicate studentID' };
         if(getStudentByEmail) throw { status: 409, message: 'Duplicate email address' };
 
         const salt = await bcrypt.genSalt(16);
-        const hashedPassword = await bcrypt.hash(student.password, salt);
+        const hashedPassword = await bcrypt.hash(student.studentPassword, salt);
 
         const newStudent = new Student({
-            StudentID: student.id,
-            StudentName: student.name,
-            StudentEmail: student.email,
+            StudentID: student.studentID,
+            StudentName: student.studentName,
+            StudentEmail: student.studentEmail,
             StudentPassword: hashedPassword,
             PasswordSalt: salt,
-            StudentImage: student.image,
+            StudentProgram: student.studentProgram,
         });
 
         await studentRepository.registerStudent(newStudent);
@@ -32,10 +36,10 @@ const registerStudent = async (student) => {
 
 const loginStudent = async (student) => {
     try {
-        const getStudentByEmail = await studentRepository.getStudentByEmail(student.email);
+        const getStudentByEmail = await studentRepository.getStudentByEmail(student.studentEmail);
         if(!getStudentByEmail) throw { status: 404, message: 'Student not found' };
 
-        const isPasswordValid = await comparePassword(student.password, getStudentByEmail.StudentPassword, getStudentByEmail.PasswordSalt); 
+        const isPasswordValid = await bcrypt.compare(student.studentPassword, getStudentByEmail.StudentPassword);
         if(!isPasswordValid) throw { status: 401, message: 'Incorrect Password' };
 
         const token = generateJWTToken({id: getStudentByEmail.StudentID, email: getStudentByEmail.StudentEmail});
@@ -45,15 +49,6 @@ const loginStudent = async (student) => {
         throw err;
     }
 };
-
-const comparePassword = async (password, hashedPassword, passwordSalt) => {
-    const generateHashedPassword = await bcrypt.hash(password, passwordSalt);
-    return hashedPassword === generateHashedPassword;
-};
-
-const generateJWTToken = (payload) => {
-    return jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '24h'});
-}
 
 const getSpecificStudent = async (studentID) => {
     try {
@@ -67,4 +62,29 @@ const getSpecificStudent = async (studentID) => {
     }
 };
 
-module.exports = {registerStudent, loginStudent, getSpecificStudent};
+const updatePassword = async (obj) => {
+    try {
+        const getStudentByEmail = await studentRepository.getStudentByEmail(obj.studentEmail);
+        const isOldPasswordValid = await bcrypt.compare(obj.oldPassword, getStudentByEmail.StudentPassword);
+
+        if(!isOldPasswordValid) throw { status: 401, message: 'Incorrect old password' };
+        if (obj.newPassword !== obj.confirmNewPassword) throw { status: 400, message: 'New password and confirm password do not match' };
+        
+        //ALPHANUMERIC 5 LETTER
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+        if(!regex.test(obj.newPassword)) throw { status: 400, message: 'Password must be alphanumeric and at least 5 characters long' };
+
+        const isMatch = await bcrypt.compare(obj.newPassword, getStudentByEmail.StudentPassword);
+        if (isMatch) throw { status: 400, message: "New password should be different from the current password." };
+
+        const salt = await bcrypt.genSalt(16);
+        const hashedPassword = await bcrypt.hash(obj.newPassword, salt);
+
+        await studentRepository.updatePassword(getStudentByEmail.StudentID, hashedPassword, salt);
+
+    }catch(err){
+        throw err;
+    }
+};
+
+module.exports = {registerStudent, loginStudent, getSpecificStudent, updatePassword};

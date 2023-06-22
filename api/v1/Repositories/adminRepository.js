@@ -47,4 +47,13 @@ const loginAdmin = async (email, password) => {
     }
 };
 
-module.exports = {getLatestID, registerAdmin, loginAdmin, getAdminByEmail, getAdminByID};
+const updatePassword = async (adminID, newPassword, passwordSalt) => {
+    try {
+        const result = await sql.query(`UPDATE MsAdmin SET AdminPassword = '${newPassword}', PasswordSalt = '${passwordSalt}' WHERE AdminID = '${adminID}'`);
+        return result;
+    }catch(err){
+        throw { status: 500, message: err };
+    }
+};
+
+module.exports = {getLatestID, registerAdmin, loginAdmin, getAdminByEmail, getAdminByID, updatePassword};

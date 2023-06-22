@@ -26,4 +26,16 @@ const loginAdmin = async (req, res) => {
     }
 }
 
-module.exports = {registerAdmin, loginAdmin};
+const updatePassword = async (req, res) => {
+    try {
+
+        const obj = req.body;
+        const result = await adminService.updatePassword(obj);
+
+        res.send({ status: "OK", data: result });   
+    } catch (err) {
+        res.status(err?.status || 500).send({ error: err?.message || err });
+    }
+}
+
+module.exports = {registerAdmin, loginAdmin, updatePassword};
