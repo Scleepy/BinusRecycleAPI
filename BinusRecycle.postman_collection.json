@@ -1,0 +1,727 @@
+{
+	"info": {
+		"_postman_id": "8b7da908-b227-4f5e-b39b-ce1b63c691fa",
+		"name": "BinusRecycle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26187140"
+	},
+	"item": [
+		{
+			"name": "RegisterAdmin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"adminName\": \"Daniel Yohanes\",\r\n    \"adminEmail\": \"daniel.yohanes@binus.ac.id\",\r\n    \"adminPassword\": \"test1\",\r\n    \"stationID\": \"ST001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/admin/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterStudent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentID\": \"2501975261\",\r\n    \"studentName\": \"Daniel Yohanes\",\r\n    \"studentEmail\": \"daniel.yohanes@binus.ac.id\",\r\n    \"studentPassword\": \"test1\",\r\n    \"studentProgram\": \"Computer Science\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/student/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"student",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetMissionProgress",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentID\": \"2501975261\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/daily-mission/progress/2501975261",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"daily-mission",
+						"progress",
+						"2501975261"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginAdmin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"adminEmail\": \"daniel.yohanes@binus.ac.id\",\r\n    \"adminPassword\": \"test1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/admin/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ChangePasswordAdmin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"adminEmail\": \"daniel.yohanes@binus.ac.id\",\r\n    \"oldPassword\": \"test1\",\r\n    \"newPassword\": \"test11\",\r\n    \"confirmNewPassword\": \"test11\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/admin/update-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"update-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ChangePasswordStudent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentEmail\": \"daniel.yohanes@binus.ac.id\",\r\n    \"oldPassword\": \"test1\",\r\n    \"newPassword\": \"test11\",\r\n    \"confirmNewPassword\": \"test11\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/student/update-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"student",
+						"update-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginStudent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentEmail\": \"daniel.yohanes@binus.ac.id\",\r\n    \"studentPassword\": \"test11\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/student/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"student",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSpecificStation",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Daniel\",\r\n    \"email\": \"daniel.yohanes@binus.ac.id\",\r\n    \"password\": \"testdaniel123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/station/ST001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"station",
+						"ST001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllStationAndInformation",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/station/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"station",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllCategories",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Daniel\",\r\n    \"email\": \"daniel.yohanes@binus.ac.id\",\r\n    \"password\": \"testdaniel123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllRewards",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Daniel\",\r\n    \"email\": \"daniel.yohanes@binus.ac.id\",\r\n    \"password\": \"testdaniel123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/reward",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"reward"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDailyMission",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "si3zJoJpJPF3pppywFiOauSHtGrX07SGxQmkNqqw5V0zRJyQ387nTegTTtchxGPK",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/daily-mission",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"daily-mission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDailyMissionHistory",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/daily-mission/history/2501975261",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"daily-mission",
+						"history",
+						"2501975261"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetRecycleHistory",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentID\": \"2501975261\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/recycle/history/2501975261",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"recycle",
+						"history",
+						"2501975261"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSpecificRecycleHistory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentID\": \"2501975261\",\r\n    \"categoryID\": \"CT001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/recycle/history/specific",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"recycle",
+						"history",
+						"specific"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPurchaseHistory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentID\": \"2501975261\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/purchase/history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"purchase",
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetStudent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentID\": \"2501975261\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/student/specific",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"student",
+						"specific"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ModelPrediction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/Daniel/Pictures/Screen_Shot_2018-10-25_at_11.02.15_AM.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/model",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"model"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StudentRecycle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentID\": \"2501975261\",\r\n    \"categoryID\": \"CT005\",\r\n    \"adminID\": \"AD001\",\r\n    \"stationID\": \"ST001\",\r\n    \"itemWeight\": 23\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/recycle/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"recycle",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StudentPurchase",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentID\": \"2501975261\",\r\n    \"rewardID\": \"RW001\",\r\n    \"purchaseAmount\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/purchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"purchase",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
