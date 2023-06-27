@@ -1,4 +1,4 @@
-const adminRepository = require('./../Repositories/AdminRepository');
+const adminRepository = require('./../Repositories/adminRepository');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Admin = require('../Models/Admin');
