@@ -4,7 +4,7 @@ const sql = require('./databaseConnection');
 
 const getSpecificRecycleHistory = async (studentID) => {
     try {
-        const result = await sql.query(`SELECT * FROM TrStudentRecycleHistory WHERE StudentID = '${studentID}'`);
+        const result = await sql.query(`SELECT * FROM TrStudentRecycleHistory A JOIN MsCategory B ON A.CategoryID = B.CategoryID JOIN MsRecycleStation C ON A.StationID = C.StationID JOIN MsBuilding D ON C.BuildingID = D.BuildingID WHERE StudentID = '${studentID}' ORDER BY RecyclingDate DESC`);
         return result.recordset;
     }catch(err){
         throw { status: 500, message: err };

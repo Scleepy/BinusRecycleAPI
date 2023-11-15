@@ -4,7 +4,8 @@ const sql = require('./databaseConnection');
 
 const getSpecificPurchaseHistory = async (studentID) => {
     try {
-        const result = await sql.query(`SELECT * FROM TrRewardPurchase WHERE StudentID = '${studentID}'`);
+        const result = await sql.query(`SELECT TransactionID, StudentID, a.RewardID, PurchaseAmount, PurchaseDate, RewardName, RewardDescription, RewardPoints 
+                                        FROM TrRewardPurchase a JOIN MsReward b ON a.RewardID = b.RewardID WHERE StudentID = '${studentID}'`);
         return result.recordset;
     }catch(err){
         throw { status: 500, message: err };
