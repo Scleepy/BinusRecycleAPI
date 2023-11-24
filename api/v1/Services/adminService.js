@@ -27,6 +27,7 @@ const registerAdmin = async (admin) => {
             AdminPassword: hashedPassword,
             PasswordSalt: salt,
             StationID: admin.stationID,
+            IsSuperUser: admin.isSuperUser
         });
 
         await adminRepository.registerAdmin(newAdmin);
@@ -45,6 +46,8 @@ const loginAdmin = async (admin) => {
         if(!isPasswordValid) throw { status: 401, message: 'Incorrect Password' };
 
         const token = generateJWTToken({AdminID: getAdminByEmail.AdminID, AdminEmail: getAdminByEmail.AdminEmail})
+
+        if (!getAdminByEmail.IsSuperUser) getAdminByEmail.IsSuperUser = false;
 
         return {Token: token, ...getAdminByEmail};
     }catch(err){

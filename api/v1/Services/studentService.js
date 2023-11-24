@@ -26,6 +26,7 @@ const registerStudent = async (student) => {
             StudentPassword: hashedPassword,
             PasswordSalt: salt,
             StudentProgram: student.studentProgram,
+            IsSuperUser: student.isSuperUser
         });
 
         await studentRepository.registerStudent(newStudent);
@@ -43,6 +44,8 @@ const loginStudent = async (student) => {
         if(!isPasswordValid) throw { status: 401, message: 'Incorrect Password' };
 
         const token = generateJWTToken({id: getStudentByEmail.StudentID, email: getStudentByEmail.StudentEmail});
+
+        if (!getStudentByEmail.IsSuperUser) getStudentByEmail.IsSuperUser = false;
 
         return {Token: token, ...getStudentByEmail};
     }catch(err){

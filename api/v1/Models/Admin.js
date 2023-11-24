@@ -26,6 +26,11 @@ const adminSchema = new mongoose.Schema({
   StationID: {
     type: String,
     required: true
+  },
+  IsSuperUser: {
+    type: Boolean, 
+    default: false,
+    required: true
   }
 });
   

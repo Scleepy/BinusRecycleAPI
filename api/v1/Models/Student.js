@@ -29,6 +29,11 @@ const studentSchema = new mongoose.Schema({
   StudentProgram: {
     type: String,
     required: true
+  },
+  IsSuperUser: {
+    type: Boolean, 
+    default: false,
+    required: true
   }
 });
   

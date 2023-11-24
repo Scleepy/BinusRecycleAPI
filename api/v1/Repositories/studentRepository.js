@@ -13,8 +13,8 @@ const getStudentByID = async (studentID) => {
 
 const registerStudent = async (newStudent) => {
     try {
-        await sql.query(`INSERT INTO MsStudent(StudentID, StudentName, StudentEmail, StudentPassword, PasswordSalt, StudentProgram) 
-        VALUES('${newStudent.StudentID}', '${newStudent.StudentName}', '${newStudent.StudentEmail}', '${newStudent.StudentPassword}', '${newStudent.PasswordSalt}', '${newStudent.StudentProgram}')`);
+        await sql.query(`INSERT INTO MsStudent(StudentID, StudentName, StudentEmail, StudentPassword, PasswordSalt, StudentProgram, IsSuperUser) 
+        VALUES('${newStudent.StudentID}', '${newStudent.StudentName}', '${newStudent.StudentEmail}', '${newStudent.StudentPassword}', '${newStudent.PasswordSalt}', '${newStudent.StudentProgram}', '${newStudent.IsSuperUser}')`);
     }catch(err){
         throw { status: 500, message: err };
     }
