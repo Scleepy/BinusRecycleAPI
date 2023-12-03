@@ -22,9 +22,16 @@ const getSpecificDailyMission = async (categoryID) => {
 
 const getSpecificDailyMissionProgress = async (studentID) => {
     try {
-        const currentDay = new Date().toISOString().split('T')[0].replace(/-/g, '');
-        const nextDay = new Date(Date.now() + 86400000).toISOString().split('T')[0].replace(/-/g, '');
-
+        const currentDateTime = new Date();
+        currentDateTime.setHours(currentDateTime.getHours() + 7); 
+        
+        const currentDay = currentDateTime.toISOString().split('T')[0].replace(/-/g, '');
+        
+        const nextDayDateTime = new Date(currentDateTime);
+        nextDayDateTime.setDate(nextDayDateTime.getDate() + 1);
+        
+        const nextDay = nextDayDateTime.toISOString().split('T')[0].replace(/-/g, '');
+        
         const result = await sql.query(`SELECT * FROM TrStudentRecycleHistory WHERE StudentID = '${studentID}' AND RecyclingDate >= '${currentDay}' AND RecyclingDate < '${nextDay}' AND MissionID IS NOT NULL`);
         return result.recordset;
     }catch(err){
@@ -34,9 +41,16 @@ const getSpecificDailyMissionProgress = async (studentID) => {
 
 const getSpecificCompletedDailyMission = async (studentID) => {
     try {
-        const currentDay = new Date().toISOString().split('T')[0].replace(/-/g, '');
-        const nextDay = new Date(Date.now() + 86400000).toISOString().split('T')[0].replace(/-/g, '');
+        const currentDateTime = new Date();
+        currentDateTime.setHours(currentDateTime.getHours() + 7); 
         
+        const currentDay = currentDateTime.toISOString().split('T')[0].replace(/-/g, '');
+        
+        const nextDayDateTime = new Date(currentDateTime);
+        nextDayDateTime.setDate(nextDayDateTime.getDate() + 1);
+        
+        const nextDay = nextDayDateTime.toISOString().split('T')[0].replace(/-/g, '');
+
         const result = await sql.query(`SELECT * FROM TrDailyMissionCompletion WHERE StudentID = '${studentID}' AND CompletionDate >= '${currentDay}' AND CompletionDate < '${nextDay}'`);
         return result.recordset;
     }catch(err){
@@ -55,8 +69,15 @@ const getDailyMissionHistory = async (studentID) => {
 
 const getDailyMissionCompletionFilterByCategoryID = async (studentID, categoryID) => {
     try {
-        const currentDay = new Date().toISOString().split('T')[0].replace(/-/g, '');
-        const nextDay = new Date(Date.now() + 86400000).toISOString().split('T')[0].replace(/-/g, '');
+        const currentDateTime = new Date();
+        currentDateTime.setHours(currentDateTime.getHours() + 7); 
+        
+        const currentDay = currentDateTime.toISOString().split('T')[0].replace(/-/g, '');
+        
+        const nextDayDateTime = new Date(currentDateTime);
+        nextDayDateTime.setDate(nextDayDateTime.getDate() + 1);
+        
+        const nextDay = nextDayDateTime.toISOString().split('T')[0].replace(/-/g, '');
 
         const result = await sql.query(`SELECT * FROM TrDailyMissionCompletion A JOIN MsDailyMission B ON A.MissionID = B.MissionID WHERE StudentID = '${studentID}' AND CategoryID = '${categoryID}' AND CompletionDate >= '${currentDay}' AND CompletionDate < '${nextDay}'`);
         return result.recordset;
@@ -74,4 +95,14 @@ const insertDailyMissionCompletion = async (data) => {
     }
 }
 
-module.exports = {getAllDailyMission, getSpecificDailyMissionProgress, getDailyMissionHistory, getSpecificCompletedDailyMission, getDailyMissionCompletionFilterByCategoryID, getSpecificDailyMission, insertDailyMissionCompletion};
+const resetDailyMission = async () => {
+    try {
+        await sql.query('EXEC spGenerateDailyMissions');
+        await sql.query(`DELETE FROM TrDailyMissionCompletion WHERE StudentID = '2501975261' AND CompletionDate >= '20231125' AND CompletionDate < '20231126'`);
+        await sql.query(`DELETE FROM TrStudentRecycleHistory WHERE StudentID = '2501975261' AND RecyclingDate >= '20231125' AND RecyclingDate < '20231126'`);
+    }catch(err){
+        throw { status: 500, message: err };
+    }
+};
+
+module.exports = {getAllDailyMission, getSpecificDailyMissionProgress, getDailyMissionHistory, getSpecificCompletedDailyMission, getDailyMissionCompletionFilterByCategoryID, getSpecificDailyMission, insertDailyMissionCompletion, resetDailyMission};

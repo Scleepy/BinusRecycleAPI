@@ -33,4 +33,15 @@ const getSpecificDailyMissionHistory = async (req, res) => {
     }
 };
 
-module.exports = {getAllDailyMission, getSpecificDailyMissionProgress, getSpecificDailyMissionHistory};
+const resetDailyMission = async (req, res) => {
+    try {
+
+        const result = await dailyMissionService.resetDailyMission();
+
+        res.send({ status: "OK", data: result });   
+    } catch (err) {
+        res.status(err?.status || 500).send({ error: err?.message || err });
+    }
+}
+
+module.exports = {getAllDailyMission, getSpecificDailyMissionProgress, getSpecificDailyMissionHistory, resetDailyMission};

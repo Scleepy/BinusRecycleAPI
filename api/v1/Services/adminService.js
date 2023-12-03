@@ -37,11 +37,9 @@ const registerAdmin = async (admin) => {
 };
 
 const loginAdmin = async (admin) => {
-    try {
-        
+    try {        
         const getAdminByEmail = await adminRepository.getAdminByEmail(admin.adminEmail);
         if(!getAdminByEmail) throw { status: 404, message: 'Admin not found' };
-
         const isPasswordValid = await bcrypt.compare(admin.adminPassword, getAdminByEmail.AdminPassword);
         if(!isPasswordValid) throw { status: 401, message: 'Incorrect Password' };
 

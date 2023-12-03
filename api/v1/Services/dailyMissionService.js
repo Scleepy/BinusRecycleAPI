@@ -70,4 +70,12 @@ const getSpecificDailyMissionHistory = async (studentID) => {
     }
 };
 
-module.exports = {getAllDailyMission, getSpecificDailyMissionProgress, getSpecificDailyMissionHistory};
+const resetDailyMission = async () => {
+    try {
+        await dailyMissionRepository.resetDailyMission();
+    }catch(err){
+        throw err;
+    }
+};
+
+module.exports = {getAllDailyMission, getSpecificDailyMissionProgress, getSpecificDailyMissionHistory, resetDailyMission};
